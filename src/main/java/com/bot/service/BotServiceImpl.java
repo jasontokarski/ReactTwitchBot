@@ -82,8 +82,8 @@ public class BotServiceImpl implements BotService {
 	    		   token = line.split(" ");
 	    		   if(token.length > 3 && token[3].substring(1).startsWith("!")) {
 	    			   token[0] = token[0].replaceAll(":(.*?)\\!|@(.*)", "");
-		    		   if(line.toLowerCase().contains(":!vote") && token.length > 3 && token[0] != "titan10x") {
-		    			   message.receiveMessage(writer, token[0], token[3].substring(1));
+		    		   if(token[3].toLowerCase().contains(":!vote") && token.length > 3 && token[0] != "titan10x") {
+		    			   message.receiveMessage(writer, token[0], token);
 		    		   } else {
 		    			   message.sendMessage(writer, "Usage: !vote <question> <choice1> <choice2> ... <choice8>");
 		    		   }
