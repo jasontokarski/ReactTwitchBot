@@ -20,6 +20,7 @@ import com.bot.Message;
 import com.bot.commands.Command;
 import com.bot.commands.VoteCommand;
 import com.bot.config.BotProperties;
+import com.bot.ui.UI;
 
 public class BotServiceImpl implements BotService {
 	
@@ -59,6 +60,14 @@ public class BotServiceImpl implements BotService {
 	@Override
 	public void init() {
     	try {
+    		
+    		UI ui = new UI();
+    		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+    			public void run() {
+    				ui.createAndShowGUI();
+    			}
+    		});
+    		
     		socket = new Socket(botProperties.getHost(), Integer.parseInt(botProperties.getPort()));
     		writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
     		reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
