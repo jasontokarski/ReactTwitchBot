@@ -75,12 +75,20 @@ public class MainWindow {
         mainPanel.add(userListArea, gbc_textPane_1);
         
         JButton btnSend = new JButton("Send");
-        btnSend.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		botService.getMessage().sendMessage(": " + sendArea.getText());
-        	}
-        });
         
+		Thread t1 = new Thread(new Runnable() {
+		    @Override
+		    public void run() {
+		        btnSend.addActionListener(new ActionListener() {
+		        	public void actionPerformed(ActionEvent e) {
+		        		botService.getMessage().sendMessage("PRIVMSG #" + botService.getChannel() + " :" + sendArea.getText());
+		        		sendArea.setText("");
+		        	}
+		        });
+		    }
+		});  
+		t1.start();
+
         GridBagConstraints gbc_btnSend = new GridBagConstraints();
         gbc_btnSend.insets = new Insets(0, 0, 0, 5);
         gbc_btnSend.gridx = 0;

@@ -10,5 +10,6 @@ public interface BotService {
 	 public void loadCommands();
 	 public void loop();
 	 public void connect();
+	 public String getChannel();
 	 public Message getMessage();
 }

@@ -72,7 +72,7 @@ public class BotServiceImpl implements BotService {
 			socket = new Socket(botProperties.getHost(), Integer.parseInt(botProperties.getPort()));
 			writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 			reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			message = new Message(botProperties.getUsername(), botProperties.getPass(), botProperties.getCommandList(), reader, writer);
+			message = new Message(botProperties.getUsername(), botProperties.getChannel(), botProperties.getCommandList(), reader, writer);
 			message.sendMessage("PASS " + botProperties.getPass());
 			message.sendMessage("NICK " + botProperties.getUsername());
 			message.sendMessage("USER " + botProperties.getUsername());
@@ -115,5 +115,9 @@ public class BotServiceImpl implements BotService {
 	
 	public Message getMessage() {
 		return this.message;
+	}
+	
+	public String getChannel() {
+		return botProperties.getChannel();
 	}
 }
