@@ -8,7 +8,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.ComponentScan;
 
 import com.bot.service.BotService;
-import com.bot.ui.UI;
+import com.bot.ui.ConnectWindow;
 
 @EnableConfigurationProperties
 @SpringBootApplication
