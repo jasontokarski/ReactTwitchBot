@@ -13,6 +13,6 @@ public class VoteCommand implements Command {
 		question = messageToken[1];
 		options = messageToken;
 		
-		message.sendMessage(bw, "PRIVMSG #" + "titan10x" + " :" + messageToken[0] + " initiated a vote!");
+		message.sendMessage("PRIVMSG #" + "titan10x" + " :" + messageToken[0] + " initiated a vote!");
 	}
 }

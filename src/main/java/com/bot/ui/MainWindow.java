@@ -34,11 +34,9 @@ import javax.swing.JTextArea;
 
 public class MainWindow {
 	private JTextArea chatArea;
+	private JTextArea sendArea;
 	
-	/**
-	 * @wbp.parser.entryPoint
-	 */
-	public void createAndShowGUI() {
+	public void createAndShowGUI(BotService botService) {
         JFrame mainFrame = new JFrame("Twitch Bot!");
         mainFrame.setTitle("React Bot for Twitch!");
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -79,6 +77,7 @@ public class MainWindow {
         JButton btnSend = new JButton("Send");
         btnSend.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		botService.getMessage().sendMessage(": " + sendArea.getText());
         	}
         });
         
@@ -88,17 +87,16 @@ public class MainWindow {
         gbc_btnSend.gridy = 7;
         mainPanel.add(btnSend, gbc_btnSend);
         
-        JTextArea textArea = new JTextArea();
+        sendArea = new JTextArea();
         GridBagConstraints gbc_textArea = new GridBagConstraints();
         gbc_textArea.gridwidth = 7;
-        textArea.setBorder(new BevelBorder(BevelBorder.LOWERED));
+        sendArea.setBorder(new BevelBorder(BevelBorder.LOWERED));
         gbc_textArea.fill = GridBagConstraints.BOTH;
         gbc_textArea.gridx = 1;
         gbc_textArea.gridy = 7;
+        mainPanel.add(sendArea, gbc_textArea);
         
         mainFrame.getContentPane().add(mainPanel);
-        
-        mainPanel.add(textArea, gbc_textArea);
         mainFrame.pack();
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         Point middle = new Point(screenSize.width / 2, screenSize.height / 2);

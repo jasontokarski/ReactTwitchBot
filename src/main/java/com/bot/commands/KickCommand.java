@@ -9,6 +9,6 @@ public class KickCommand implements Command {
 	private String[] options;
 	
 	public void execute(String[] messageToken, BufferedWriter bw, Message message) {
-		message.sendMessage(bw, "Received Message");
+		message.sendMessage("Received Message");
 	}
 }

@@ -72,11 +72,11 @@ public class BotServiceImpl implements BotService {
 			socket = new Socket(botProperties.getHost(), Integer.parseInt(botProperties.getPort()));
 			writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 			reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			message = new Message(botProperties.getUsername(), botProperties.getPass(), botProperties.getCommandList());
-			message.sendMessage(writer, "PASS " + botProperties.getPass());
-			message.sendMessage(writer, "NICK " + botProperties.getUsername());
-			message.sendMessage(writer, "USER " + botProperties.getUsername());
-			message.sendMessage(writer, "JOIN #" + botProperties.getChannel());
+			message = new Message(botProperties.getUsername(), botProperties.getPass(), botProperties.getCommandList(), reader, writer);
+			message.sendMessage("PASS " + botProperties.getPass());
+			message.sendMessage("NICK " + botProperties.getUsername());
+			message.sendMessage("USER " + botProperties.getUsername());
+			message.sendMessage("JOIN #" + botProperties.getChannel());
 		} catch (NumberFormatException | IOException e) {
 			e.printStackTrace();
 		}
@@ -100,9 +100,9 @@ public class BotServiceImpl implements BotService {
 	    		   if(token.length > 3 && token[3].substring(1).startsWith("!")) {
 	    			   token[0] = token[0].replaceAll(":(.*?)\\!|@(.*)", "");
 		    		   if(token[3].toLowerCase().contains(":!vote") && token.length > 3 && token[0] != "titan10x") {
-		    			   message.receiveMessage(writer, token[0], token);
+		    			   message.receiveMessage(token[0], token);
 		    		   } else {
-		    			   message.sendMessage(writer, "Usage: !vote <question> <choice1> <choice2> ... <choice8>");
+		    			   message.sendMessage("Usage: !vote <question> <choice1> <choice2> ... <choice8>");
 		    		   }
 	    		   }
 	    		   mainWindow.setChatArea(line);
@@ -111,5 +111,9 @@ public class BotServiceImpl implements BotService {
 	       } catch (IOException e) {
 	    	   e.printStackTrace();
 	       }
+	}
+	
+	public Message getMessage() {
+		return this.message;
 	}
 }

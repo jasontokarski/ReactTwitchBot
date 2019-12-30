@@ -178,7 +178,7 @@ public class ConnectWindow {
         		if(!resultField.getText().equals("") && !resultField2.getText().equals("") && !resultField3.getText().equals("")
         				&& !resultField4.getText().equals("") && !resultField5.getText().equals("")) {
         			connectFrame.setVisible(false);
-        			mainWindow.createAndShowGUI();
+        			mainWindow.createAndShowGUI(botService);
         		     SwingUtilities.invokeLater(new Runnable() {
         		         public void run() {
         		        	 botService.connect();
